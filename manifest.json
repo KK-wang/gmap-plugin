@@ -3,10 +3,6 @@
   "description": "A chrome extension for google map in order to download pictures easily",
   "version": "1.0",
   "manifest_version": 3,
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": "icon.png"
-  },
   "icons": {
     "16": "icon.png",
     "32": "icon.png",
@@ -28,14 +24,5 @@
       ],
       "js": ["script/content-script.js"]
     }
-  ],
-  "commands": {
-    "toggle": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Z",
-        "mac": "Command+Shift+Z"
-      },
-      "description": "Quickly enable or disable this extension."
-    }
-  }
+  ]
 }
