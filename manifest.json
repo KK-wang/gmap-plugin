@@ -1,0 +1,41 @@
+{
+  "name": "Google Map Extensions",
+  "description": "A chrome extension for google map in order to download pictures easily",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "background": {
+    "service_worker": "script/background.js"
+  },
+  "permissions": [
+    "downloads",
+    "fileSystemProvider"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/maps/*",
+        "http://www.google.com/maps/*"
+      ],
+      "js": ["script/content-script.js"]
+    }
+  ],
+  "commands": {
+    "toggle": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Z",
+        "mac": "Command+Shift+Z"
+      },
+      "description": "Quickly enable or disable this extension."
+    }
+  }
+}
