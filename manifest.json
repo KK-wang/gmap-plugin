@@ -13,8 +13,7 @@
     "service_worker": "script/background.js"
   },
   "permissions": [
-    "downloads",
-    "fileSystemProvider"
+    "downloads"
   ],
   "content_scripts": [
     {

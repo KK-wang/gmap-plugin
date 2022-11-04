@@ -152,7 +152,11 @@ directionButtonGroup.addEventListener("click", (e) => {
   else if (itemClassList.includes("right")) searchParams.set("yaw", "90");
   else searchParams.set("yaw", "180");
   res.imgUrl.search = searchParams.toString();
-  console.log(res.imgUrl.toString());
+  chrome.runtime.sendMessage({
+    url: res.imgUrl.toString(),
+    addressText: res.addressText,
+    coordinate: res.coordinate,
+  });
 });
 
 
@@ -170,12 +174,15 @@ const revealCard = document.querySelector("#reveal-card");
 function getInfo() {
   let imgURL = null, addressText = null, coordinate = null;
   try {
-    const imgButton = revealCard.querySelector("button[jstcache='608']");
+    const revealCardInnerDiv = revealCard.childNodes[0];
+    const imgButton = revealCardInnerDiv.childNodes[2];
     const imgUrl = imgButton.style.backgroundImage.slice(5, -2);
-    const address = revealCard.querySelector("div[jstcache='624']:first-child")
+    const dialogDiv = imgButton.nextElementSibling;
+    const infoButton = dialogDiv.childNodes[2];
+    const address = infoButton.firstChild;
     addressText = address.textContent;
-    const coordinateButton = revealCard.querySelector("button[jstcache='627']:last-child");
-    coordinate = coordinateButton.textContent;
+    const coordinateButtonOuterDiv = dialogDiv.lastChild;
+    coordinate = coordinateButtonOuterDiv.lastChild.textContent;
     imgURL = new URL(imgUrl);
   } catch (e) {
     return {
@@ -190,7 +197,4 @@ function getInfo() {
     coordinate,
   }
 }
-
-/* 下载逻辑。*/
-
 
